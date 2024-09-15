@@ -9,7 +9,7 @@
         {% for carro in carros %}
         <li>
             {{ carro.automovel.marca }} {{ carro.automovel.modelo }} - Cor: {{ carro.cor }} - Tipo: {{ carro.tipo }} - Portas: {{ carro.numero_portas }}
-            <a href="{% url 'deletar_carro' carro.id %}">Deletar</a>
+            <a href="{% url 'deletar_carro' carro.pk %}">Deletar</a>
         </li>
         {% endfor %}
     </ul>

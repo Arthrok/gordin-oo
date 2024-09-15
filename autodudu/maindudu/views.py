@@ -46,6 +46,9 @@ def listar_automoveis(request):
     automoveis = Automovel().obter_todos_automoveis()  # Chamando o método do model
     return render(request, 'listar_automoveis.html', {'automoveis': automoveis})
 
+
+
+
 # Formulário para Automóvel
 class AutomovelForm(forms.ModelForm):
     class Meta:
@@ -64,21 +67,24 @@ def criar_automovel(request):
     
     return render(request, 'criar_automovel.html', {'form': form})
 
+class CarroForm(forms.ModelForm):
+    class Meta:
+        model = Carro
+        fields = ['automovel', 'cor', 'tipo', 'numero_portas']  # Campos do modelo Carro
 
-
-# Views para Carro
 def criar_carro(request):
     if request.method == 'POST':
-        automovel_id = request.POST.get('automovel')
-        automovel = Automovel.objects.get(_id=automovel_id)
-        cor = request.POST.get('cor')
-        tipo = request.POST.get('tipo')
-        numero_portas = request.POST.get('numero_portas')
-        Carro.create_carro(automovel, cor, tipo, numero_portas)
-        return redirect('listar_carros')
+        form = CarroForm(request.POST)
+        print(form)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_carros')
     else:
-        automoveis = Automovel.obter_todos_automoveis()  # Obter automóveis disponíveis
-        return render(request, 'criar_carro.html', {'automoveis': automoveis})
+        form = CarroForm()
+    
+    # Passa a lista de automóveis cadastrados para o template
+    automoveis = Automovel.objects.all()
+    return render(request, 'criar_carro.html', {'form': form, 'automoveis': automoveis})
 
 def listar_carros(request):
     carros = Carro.obter_todos_carros()

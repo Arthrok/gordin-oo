@@ -3,6 +3,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from djongo import models
 
+
 class Usuario(AbstractBaseUser, PermissionsMixin):
     _id = models.ObjectIdField(primary_key=True)
     email = models.EmailField(unique=True)

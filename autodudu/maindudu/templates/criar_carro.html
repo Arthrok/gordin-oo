@@ -10,9 +10,9 @@
         <label for="automovel">Automóvel:</label>
         <select name="automovel" required>
             {% for automovel in automoveis %}
-            <option value="{{ automovel }}">{{ automovel.marca }} - {{ automovel.modelo }} - {{ automovel.ano }}</option>
+            <option value="{{ automovel.pk }}">{{ automovel.marca }} - {{ automovel.modelo }} - {{ automovel.ano }}</option>
             {% endfor %}
-        </select><br>
+        </select>
 
         <label for="cor">Cor:</label>
         <input type="text" name="cor" required><br>
